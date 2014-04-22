@@ -1,0 +1,53 @@
+ARCHITECT Problem
+
+Responsibilities											|	Collaborators
+
+Airport
+It can hold planes up to its capacity						|	plane
+It knows its capacity										| 	plane
+It can communicate a message re: its current capacity		|  	runway
+It can accept requests for planes to exit from runway		|	plane, runway
+It can delay planes from proceeding to runway				|  	plane, runway
+It can send a request to a plane to proceed to runway for 
+take off													|	plane, runway
+
+??It can refuel planes										|  	plane
+??It can receive a request to refuel from a plane 			| 	plane
+
+
+Plane 
+It can proceed from airport to runway						|  	runway airport sky
+It can take off from runway									|  	runway, sky
+It can fly													|  	sky
+It can land on runway										|  	runway, sky
+It can exit from runway to airport							|  	runway, airport
+It knows whether it is flying or on the ground				|  	runway, airport, sky
+It can receive a request to proceed to runway for take off	|	airport, runway, sky
+It can send a request to proceed to runway for take off		|	airport, runway, sky
+It can send a request to land on runway						|	runway
+It can receive a request to prepare for take off from runway|	runway, sky
+It can send a request to take off							|	runway, sky
+
+??It has a fuel capacity									|  
+??It knows when it needs to refuel 							|  	airport 
+??It knows how far it can travel before re-fuelling			|  	sky, runway
+
+Runway
+It can hold one plane										|  	plane, airport
+It can be empty												|  	airport
+It can send messages about its current status				|  	airport, sky
+It can receive requests to accept plane from sky			|  	sky, plane
+It can receive requests to accept plane from airport		|  	airport, plane
+It can allow planes to take off into sky					|  	sky, plane
+It can allow planes to land from sky						|  	sky, plane
+
+Sky
+It can have a weather status of either sunny or stormy		| 
+It knows its weather status									|
+It can communicate its weather status						|  	runway
+It can hold an infinite number of planes when sunny     	|  	plane, runway
+It can’t hold any planes when stormy						|  	plane, runway
+It can deny request for plane to take off when stormy		|  	plane, runway
+It can allow plane to take off when sunny					|  	plane, runway
+It can send a request for plane to land on runway			|  	plane, runway
+
