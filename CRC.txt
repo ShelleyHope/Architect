@@ -11,8 +11,6 @@ It can delay planes from proceeding to runway				|  	plane, runway
 It can send a request to a plane to proceed to runway for 
 take off													|	plane, runway
 
-??It can refuel planes										|  	plane
-??It can receive a request to refuel from a plane 			| 	plane
 
 
 Plane 
@@ -28,9 +26,7 @@ It can send a request to land on runway						|	runway
 It can receive a request to prepare for take off from runway|	runway, sky
 It can send a request to take off							|	runway, sky
 
-??It has a fuel capacity									|  
-??It knows when it needs to refuel 							|  	airport 
-??It knows how far it can travel before re-fuelling			|  	sky, runway
+
 
 Runway
 It can hold one plane										|  	plane, airport

@@ -1,23 +1,21 @@
 class Plane
 
-	def initialize(status=flying)
-		@flying
-	end
-	
-	def has_flying_status?
-		@flying = true
+	def initialize(status="flying")
+		@status = status
 	end
 
 	def flying?
-		has_flying_status?
-		self
+		@status == "flying"
 	end
 
-	def take_off
-		flying?
+	def take_off!
+		@status = "flying"
 	end
 		
 	def land!
-		
+	  @status = "landed"
 	end
+
+
+
 end
