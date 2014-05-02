@@ -4,7 +4,6 @@ require "plane"
 describe "Airport" do
 
 	context "capacity tests" do
-
 		let(:airport)                 { Airport.new }
    	let(:airport_with_planes)     { Airport.new ([:plane, :plane]) }
    	let(:airport_with_six_planes) { Airport.new([:plane, :plane, :plane, :plane, :plane, :plane,]) }
@@ -17,22 +16,24 @@ describe "Airport" do
 			expect(airport_with_planes).to have_planes
 		end
 
-  	it "is not full" do
+  	it "is not full when it is holding less than capacity" do
   		expect(airport).not_to be_full
   	end
 
   	it "is full when it has reached its capacity (of six planes)" do
   		expect(airport_with_six_planes).to be_full
   	end
-	end
-  
-  context "landing planes in good weather" do
+	
+    it "should not land a plane when the airport is full" do
+      expect{airport_with_six_planes.land(:plane)}.to raise_error "DENIED"
+    end
 
+  end
+  
+  context "landing in good weather" do
   	let(:sky) { double :sky, :weather? => "sunny" }
   	let(:airport) { Airport.new([], sky) }
-    let(:plane) { double :plane  }
-    let(:airport_with_six_planes) { Airport.new([:plane, :plane, :plane, :plane, :plane, :plane,], sky) }
-
+   
   	it "should land the plane in good weather" do
   		plane = Plane.new 
   		airport.land(plane)
@@ -40,63 +41,31 @@ describe "Airport" do
   		expect(airport).to have_planes
   	end
 
-  	it "should not land a plane even in good weather if the airport is full" do
-  	
-			expect{airport_with_six_planes.land(:plane)}.to raise_error "DENIED"
+  end
+
+  context "landing in stormy weather" do
+    let(:sky)     { double :sky, :weather? => "stormy" }
+    let(:airport) { Airport.new([], sky) }
+  
+    it "should not land a plane in stormy weather" do
+      plane = Plane.new
+      expect{airport.land(plane)}.to raise_error "Stormy"
     end
 
 
   end
 
-  context "stormy weather" do
-  
-  it "should not land a plane in stormy weather" do
+  context "taking off in good weather" do
+    let(:sky)                     { double :sky, :weather? => "sunny" }
+    let(:plane)                   { Plane.new  }
+    let(:airport)                 { Airport.new([plane], sky) }
     
-  end
+    it "should allow planes to take off" do
+      expect(airport.take_off(plane)).to be_true
+      expect(airport).not_to have_planes
+      expect(plane.flying?).to be_true
+    end
 
   end
 
-
-
-#   let(:airport)                 { Airport.new }
-#   let(:airport_with_planes)     { Airport.new ([:plane, :plane]) }
-#   let(:airport_with_six_planes) { Airport.new ([:plane, :plane, :plane, :plane, :plane, :plane,])}
-
-
-
-# context	"random weather"
-
-# # the below tests pass occasionally as expected
-
-#   it "checks whether the sky is sunny" do
-#  	  expect(airport.check_sky).to eq "sunny"
-#   end
-  
-#   it "checks whether the sky is stormy" do
-#   	expect(airport.check_sky).to eq "stormy"
-#   end
- 
-# context "landing planes"
-
-#   it "allows a plane to land when it is sunny and the airport is not full" do
-# 		expect(airport_with_planes.permission_to_land?).to be true
-# 	end
-
-# 	it "denies permission to land when full" do
-#     expect{airport_with_six_planes.permission_to_land?}.to raise_error "DENIED"
-# 	end
-
-
-#   it "denies permission to land when the sky is stormy" do
-#   	expect{airport.permission_to_land?}.to raise_error "DENIED"
-#   end
-
-
-#   it "has a plane after one lands" do
-#   	expect(airport.accept_landing!.plane_count).to eq 1
-#   end
-
-#   it "allows a plane to take off if the sky is sunny" do
-#   	expect{airport.permission_to_take_off?}.to raise_error "OK"
-#   end
 end

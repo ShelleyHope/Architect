@@ -29,30 +29,10 @@ class Airport
     self
   end
 
-
-  # def check_sky
-  # 	@check = Sky.new
-  #   @check.weather?
-  # end
-
-  # def accept_landing!
-  # 	@planes.unshift(Plane.new.land!)
-  # 	self
-  # end  
-
-  # def check_planes
-  # 	@planes.each do |plane| 
-  # 		plane = "landed"
-  #   end
-  # end
-
-  # def permission_to_take_off?
-  # 	raise "DENIED" if check_sky == "stormy"
-  #   true
-  # end
-
-  # def accept_take_off!
-  #   @planes.shift(Plane.new)
-  # end
+  def take_off(plane)
+    raise "Stormy" if @sky.weather? != "sunny"
+    plane.take_off!
+    @planes.delete(plane)
+  end
 
 end
