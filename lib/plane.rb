@@ -16,6 +16,4 @@ class Plane
 	  @status = "landed"
 	end
 
-
-
 end

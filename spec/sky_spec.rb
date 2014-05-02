@@ -13,5 +13,4 @@ let(:sky) { Sky.new }
   	sky.stub(:rand).with(1..10){9}
   	expect(sky.weather?).to eq "stormy"
   end
-
 end
