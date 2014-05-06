@@ -15,5 +15,4 @@ class Plane
 	def land!
 	  @status = "landed"
 	end
-
 end

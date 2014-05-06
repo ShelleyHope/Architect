@@ -34,5 +34,4 @@ class Airport
     plane.take_off!
     @planes.delete(plane)
   end
-
 end

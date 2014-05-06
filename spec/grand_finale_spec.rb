@@ -23,5 +23,4 @@ describe "Grand_Finale" do
   	expect(busy_airport).not_to have_planes
     expect(plane.flying?).to be_true
   end
-
 end

@@ -11,6 +11,5 @@ class Sky
 	  else
 			@weather
 	  end
-  end
-		
+  end	
 end

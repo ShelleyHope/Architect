@@ -15,6 +15,5 @@ describe "Plane" do
 
   it "can land" do
 	  expect(plane.land!).to eq "landed"
-  end
-  
+  end 
 end
